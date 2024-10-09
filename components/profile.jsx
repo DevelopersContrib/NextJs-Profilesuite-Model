@@ -51,7 +51,7 @@ export default function Profile() {
           </div>
 
           {profilesData.map(profile => (
-            <div key={profile.id} className="col-md-3 d-flex">
+            <div key={profile.id} className="col-md-3">
               <ProfileCard {...profile} />
             </div>
           ))}
@@ -77,17 +77,17 @@ function ProfileCard({ name, address, intro, image, cover_image }) {
         />
         <h3 className="profile-name">{name}</h3>
       </div>
-      <div className='cover-image py-2'>
+      <div className='cover-image'>
         <Image
           src={cover_image}
-          alt={`${name}'s Profile`}
-          width={250}
-          height={250}
-          className='img-responsive'
+          alt={`${name}'s Cover Image`}
+          layout="fill"
+          objectFit="cover"
         />
       </div>
-      <div className="profile-addres small">{address}</div>
+      <div className="profile-address small">{address}</div>
       <p className="profile-intro">{intro}</p>      
     </div>
   );
 }
+
