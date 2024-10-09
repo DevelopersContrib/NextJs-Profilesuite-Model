@@ -56,7 +56,7 @@ export default function Profile() {
       )}
         </div>
         <div className="row">
-            <div className='col text-center'><button className="profile-btn">View More</button></div>
+        <div className='col text-center'> <Link href="https://www.profilesuite.com/discover" target='_blank'><button className="profile-btn">View More</button></Link></div>
         </div>
       </div>
     </section>
