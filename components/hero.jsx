@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import styles from './Hero.module.css';
+import Link from 'next/link'
 
 export default function Hero() {
   const images = [
@@ -35,7 +36,7 @@ export default function Hero() {
             <p className="hero-description">
               Create and build your professional model profile in 2 minutes 
             </p>
-            <button className="hero-signup-btn">Sign Up Now</button>
+            <Link href="https://www.profilesuite.com/signup" target="_blank"><button className="hero-signup-btn">Sign Up Now</button></Link>
           </div>
 
           <div className="col-md-6">

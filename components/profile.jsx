@@ -1,43 +1,35 @@
+"use client";
 import Image from 'next/image';
-
-const profilesData = [
-  {
-    id: 1,
-    name: "Alicia Fox",
-    address: "Delray Beach, Florida",
-    intro: "Happy is the new rich.",
-    image: "https://cdn-icons-png.flaticon.com/512/3177/3177440.png",
-    cover_image: "https://cdn.vnoc.com/profilesuite/models/CELESTE%20B.jpg",
-  },
-  {
-    id: 2,
-    name: "Jane Smith",
-    address: "Delray Beach, Florida",
-    intro: "Create impact with every strategy.",
-    image: "https://cdn-icons-png.flaticon.com/512/3177/3177440.png",
-    cover_image: "https://cdn.vnoc.com/profilesuite/models/JEANIE%20H.JPG",    
-  },
-  {
-    id: 3,
-    name: "Alice Johnson",
-    address: "Delray Beach, Florida",
-    intro: "Build with passion, design with purpose.",
-    image: "https://cdn-icons-png.flaticon.com/512/3177/3177440.png",
-    cover_image: "https://cdn.vnoc.com/profilesuite/models/ALIA%20B.jpeg",
-  },
-  {
-    id: 4,
-    name: "Anna Williams",
-    address: "Delray Beach, Florida",
-    intro: "Craft experiences that matter.",
-    image: "https://cdn-icons-png.flaticon.com/512/3177/3177440.png",
-    cover_image: "https://cdn.vnoc.com/profilesuite/models/COLLEEN%20C.jpg",
-  }
-];
+import { useEffect, useState } from 'react';
+import LoadingState from './LoadingState';
+import Link from 'next/link'
 
 
 
 export default function Profile() {
+  const [profileData, setprofileData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/profiles", { next: { revalidate: 6000} });
+        if (response.ok) {
+          const res = await response.json();
+          setprofileData(res.profiles);
+          setIsLoading(false);
+        } else {
+          alert('An error occurred');
+        }
+      } catch (error) {
+        console.error('Error fetching blogs:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <section className="profile-section">
       <div className="container">
@@ -50,11 +42,18 @@ export default function Profile() {
 
           </div>
 
-          {profilesData.map(profile => (
-            <div key={profile.id} className="col-md-3">
+          {isLoading ? (
+        <LoadingState />
+      ) : (
+        <>
+
+          {profileData.map(profile => (
+            <div key={profile.id} className="col-md-3 mb-4">
               <ProfileCard {...profile} />
             </div>
           ))}
+           </>
+      )}
         </div>
         <div className="row">
             <div className='col text-center'><button className="profile-btn">View More</button></div>
@@ -64,30 +63,52 @@ export default function Profile() {
   );
 }
 
-function ProfileCard({ name, address, intro, image, cover_image }) {
+function ProfileCard({ domain, name, intro, image, socials }) {
+  const [imgSrc, setImgSrc] = useState(image);
   return (
-    <div className="profile-card d-flex flex-column">
-      <div className='d-flex'>
-        <Image
-          src={image}
-          alt={`${name}'s Profile`}
-          width={50}
-          height={50}
-          className="profile-image rounded-circle me-2"
-        />
-        <h3 className="profile-name">{name}</h3>
+    <div className="profile-card d-flex flex-column text-center">
+      <Image
+        src={imgSrc}
+        alt={name}
+        width={128}
+        height={128}
+        className="profile-image mx-auto"
+        onError={() => {
+          setImgSrc('https://cdn.vnoc.com/logos/logo-ProfileSuite-2.png');
+      }}
+      />
+      <h3 className="profile-name">{name}</h3>
+      <p className="profile-intro">{intro}</p>
+      <Link href={`https://${domain}`} target='_blank'><button className="view-profile-btn mt-auto">View Profile</button></Link>
+      <div className="social-icons">
+        {socials.facebook && (
+          <a href={socials.facebook} target="_blank" rel="noopener noreferrer">
+            <Image src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width={24} height={24} />
+          </a>
+        )}
+        {socials.twitter && (
+          <a href={socials.twitter} target="_blank" rel="noopener noreferrer">
+            <Image src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter" width={24} height={24} />
+          </a>
+        )}
+        {socials.linkedin && (
+          <a href={socials.linkedin} target="_blank" rel="noopener noreferrer">
+            <Image src="https://cdn-icons-png.flaticon.com/512/733/733561.png" alt="LinkedIn" width={24} height={24} />
+          </a>
+        )}
+        {socials.instagram && (
+          <a href={socials.instagram} target="_blank" rel="noopener noreferrer">
+            <Image src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width={24} height={24} />
+          </a>
+        )}
+        {socials.youtube && (
+          <a href={socials.youtube} target="_blank" rel="noopener noreferrer">
+            <Image src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" width={24} height={24} />
+          </a>
+        )}
       </div>
-      <div className='cover-image'>
-        <Image
-          src={cover_image}
-          alt={`${name}'s Cover Image`}
-          layout="fill"
-          objectFit="cover"
-        />
-      </div>
-      <div className="profile-address small">{address}</div>
-      <p className="profile-intro">{intro}</p>      
     </div>
   );
 }
+
 
