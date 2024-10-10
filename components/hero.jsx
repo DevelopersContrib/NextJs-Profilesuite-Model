@@ -5,7 +5,7 @@ import Image from 'next/image';
 import styles from './Hero.module.css';
 import Link from 'next/link'
 
-export default function Hero() {
+export default function Hero({domain}) {
   const images = [
     "https://cdn.vnoc.com/profilesuite/model-1.jpg",
     "https://cdn.vnoc.com/profilesuite/model-2.jpg",
@@ -36,7 +36,7 @@ export default function Hero() {
             <p className="hero-description">
               Create and build your professional model profile in 2 minutes 
             </p>
-            <Link href="https://www.profilesuite.com/signup" target="_blank"><button className="hero-signup-btn">Sign Up Now</button></Link>
+            <Link href={`https://www.profilesuite.com/signup?domain=${domain}`} target="_blank"><button className="hero-signup-btn">Sign Up Now</button></Link>
           </div>
 
           <div className="col-md-6">
