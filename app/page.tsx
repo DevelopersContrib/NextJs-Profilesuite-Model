@@ -5,7 +5,8 @@ import Profile from "../components/profile";
 import Platform from "../components/platform";
 import OurApps from "../components/OurApps";
 import { getData, getDomain, getTopsites, getScript } from "../lib/data";
-import HeaderWidget from "@/components/HeaderWidget"
+import HeaderWidget from "@/components/HeaderWidget";
+import { CTABannerSection } from "../components/ctabanner";
 
 export default async function Home() {
   const c = await getData();
@@ -28,13 +29,19 @@ export default async function Home() {
 
   return (
     <>
-     <HeaderWidget domain={domain} piwikId={c.data.piwikId} accountGA={c.data.accountGA} adsenseClientId={c.data.adsenseClientId}  />
-     
+      <HeaderWidget
+        domain={domain}
+        piwikId={c.data.piwikId}
+        accountGA={c.data.accountGA}
+        adsenseClientId={c.data.adsenseClientId}
+      />
+
       <Navigation domain={domain} logo={c.data.logo} />
-      <Hero domain={domain}/>
+      <Hero domain={domain} />
       <Profile />
       <Platform />
       <OurApps />
+      <CTABannerSection />
       <Footer
         domain={domain}
         twitter_url={twitter_url}
