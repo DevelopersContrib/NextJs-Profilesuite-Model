@@ -10,7 +10,7 @@ export default function Navigation({ domain,logo }) {
             <span>
               <b>Flash News!</b>
             </span>
-            &nbsp;ADAO token is dropping to your Base chain soon! Get ADAO today while it's on sale!
+            &nbsp;ADAO token is dropping to your Base chain soon! Get ADAO today while it&apos;s on sale!
           </a>
         </div>
       </div>
