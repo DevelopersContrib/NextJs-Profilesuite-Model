@@ -28,7 +28,7 @@ export default function Hero({domain}) {
   }, [images.length]);
 
   return (
-    <section className="hero-section">
+    <section className="hero-section bg-cgray">
       <div className="container">
         <div className="row align-items-center">
           <div className="col-md-6">

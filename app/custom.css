@@ -50,7 +50,7 @@
 /* Hero Section */
 .hero-section {
     position: relative;
-    background: url('https://cdn.vnoc.com/profilesuite/models/footer-bg.jpg');
+    background: url('https://cdn.vnoc.com/profilesuite/bg/bg-models.jpg');
     padding: 100px 0;
     color: #ffffff;
     height: 100vh;
@@ -63,7 +63,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.55);
+    background: rgba(0, 0, 0, 0.75);
     z-index: 1;
 }
 
@@ -291,3 +291,7 @@
   .flash-news a:hover {
     animation-play-state: paused;
   }
+
+.banner-section {
+    padding: 80px 0;
+}

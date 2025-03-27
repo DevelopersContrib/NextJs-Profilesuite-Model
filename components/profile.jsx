@@ -29,7 +29,7 @@ export default function Profile() {
   }, []);
 
   return (
-    <section className="profile-section">
+    <section className="profile-section bg-cgray">
       <div className="container">
         <div className="row align-items-stretch">
           <div className="col-md-12 text-center mb-4">
