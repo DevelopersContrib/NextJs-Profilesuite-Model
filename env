@@ -1,0 +1,5 @@
+NEXT_PUBLIC_VERCEL_URL=talentperks.com
+CONTRIB_API1=https://api1.contrib.co/v2/domains/getdomainconfig?key=5c1bde69a9e783c7edc2e603d8b25023
+GET_BLOGS=https://api1.contrib.co/v2/vbot/getblogs?key=5c1bde69a9e783c7edc2e603d8b25023
+CONTRIB_API1_TOPSITES=https://api1.contrib.co/v2/domains/getTopsites?key=5c1bde69a9e783c7edc2e603d8b25023
+GET_PROFILES=https://www.profilesuite.com/api/Getprofilesfm?api_key=10b9e6485f81ea133372c2e0e975b6b3c0cf729e3ae61d4ca33388bc443674a69&category_id=2&limit=8
